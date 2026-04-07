@@ -41,7 +41,7 @@ export default function ObjectDetail() {
   return (
     <div className="min-h-screen bg-bg">
       <Navbar />
-      <main className="pt-24 px-6 pb-24">
+      <main className="pt-24 px-6 pb-96 md:pb-24">
         <div className="max-w-6xl mx-auto">
           <Link to="/objekt" className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors mb-8">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,9 +63,9 @@ export default function ObjectDetail() {
           ) : (
             <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-6 items-start">
               <div className="space-y-4">
-                <div className="relative rounded-3xl border border-border bg-card overflow-hidden shadow-card w-full aspect-[3/4] cursor-pointer" onClick={() => selectedImage && setImagePopupOpen(true)}>
+                <div className="relative rounded-3xl border border-border bg-card overflow-hidden shadow-card w-full aspect-square cursor-pointer" onClick={() => selectedImage && setImagePopupOpen(true)}>
                   {selectedImage ? (
-                    <img src={selectedImage} alt={item.title} className="w-full h-full object-contain" />
+                    <img src={selectedImage} alt={item.title} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full bg-bg/60" />
                   )}

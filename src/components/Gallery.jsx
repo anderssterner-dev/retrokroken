@@ -29,13 +29,13 @@ function ProductCard({ item, index, variant = 'dark' }) {
       style={{ transitionDelay: `${index * 80}ms` }}
     >
       {/* Image */}
-      <div className={`relative aspect-[4/3] overflow-hidden ${isLight ? 'bg-mist' : 'bg-bg/60'}`}>
+      <div className={`relative aspect-square overflow-hidden ${isLight ? 'bg-mist' : 'bg-bg/60'}`}>
         <Link to={`/objekt/${item.id}`} className="block h-full">
           {item.image_url ? (
             <img
               src={item.image_url}
               alt={item.title}
-              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
             <>
