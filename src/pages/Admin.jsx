@@ -70,7 +70,7 @@ function LoginForm() {
 
 // ── Item list row ─────────────────────────────────────────────────────────────
 
-function ItemRow({ item, onToggle, onDelete }) {
+function ItemRow({ item, onToggle, onDelete, onEdit }) {
   const [busy, setBusy] = useState(false)
 
   async function toggle() {
@@ -84,6 +84,10 @@ function ItemRow({ item, onToggle, onDelete }) {
     setBusy(true)
     await onDelete(item.id)
     setBusy(false)
+  }
+
+  function edit() {
+    onEdit(item)
   }
 
   return (
@@ -108,6 +112,10 @@ function ItemRow({ item, onToggle, onDelete }) {
       }`}>
         {item.status}
       </span>
+      <button onClick={edit} disabled={busy}
+        className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/40 hover:border-white/40 hover:text-white transition-all disabled:opacity-40 flex-shrink-0">
+        Edit
+      </button>
       <button onClick={toggle} disabled={busy}
         className="text-xs px-3 py-1.5 rounded-lg border border-magenta/40 text-magenta hover:bg-magenta hover:text-white transition-all disabled:opacity-40 flex-shrink-0">
         {item.status === 'published' ? 'Unpublish' : 'Publish'}
@@ -124,6 +132,7 @@ function ItemRow({ item, onToggle, onDelete }) {
 
 function Dashboard({ session }) {
   const [form,         setForm]         = useState(EMPTY_FORM)
+  const [editingId,    setEditingId]    = useState(null)
   const [imageFiles,   setImageFiles]   = useState([])
   const [imagePreviews, setImagePreviews] = useState([])
   const [items,        setItems]        = useState([])
@@ -134,7 +143,7 @@ function Dashboard({ session }) {
   async function fetchItems() {
     const { data } = await supabase
       .from('items')
-      .select('id, title, object_code, main_category, category, era, image_url, status')
+      .select('*')
       .order('created_at', { ascending: false })
     if (data) setItems(data)
   }
@@ -182,21 +191,32 @@ function Dashboard({ session }) {
     setMessage(null)
     try {
       const uploadedUrls = await uploadImages()
-      const image_url = uploadedUrls[0] || null
-      const gallery_images = uploadedUrls.slice(1)
       const title = form.title_sv.trim() || form.title_no.trim() || form.title_en.trim()
       const payload = {
         ...form,
         title,
         object_code: form.object_code.trim() || null,
-        image_url,
-        gallery_images,
         status,
       }
-      const { error } = await supabase.from('items').insert(payload)
+
+      if (uploadedUrls.length > 0) {
+        payload.image_url = uploadedUrls[0]
+        payload.gallery_images = uploadedUrls.slice(1)
+      }
+
+      let error
+      if (editingId) {
+        const { error: updateError } = await supabase.from('items').update(payload).eq('id', editingId)
+        error = updateError
+      } else {
+        const { error: insertError } = await supabase.from('items').insert(payload)
+        error = insertError
+      }
+
       if (error) throw new Error(error.message)
-      setMessage(status === 'published' ? 'Item published!' : 'Saved as draft.')
+      setMessage(editingId ? 'Item updated!' : (status === 'published' ? 'Item published!' : 'Saved as draft.'))
       setForm(EMPTY_FORM)
+      setEditingId(null)
       imagePreviews.forEach((preview) => URL.revokeObjectURL(preview))
       setImageFiles([])
       setImagePreviews([])
@@ -217,6 +237,24 @@ function Dashboard({ session }) {
   async function deleteItem(id) {
     await supabase.from('items').delete().eq('id', id)
     fetchItems()
+  }
+
+  async function editItem(item) {
+    setForm({
+      title_sv: item.title_sv || '',
+      title_no: item.title_no || '',
+      title_en: item.title_en || '',
+      object_code: item.object_code || '',
+      description_sv: item.description_sv || '',
+      description_no: item.description_no || '',
+      description_en: item.description_en || '',
+      main_category: item.main_category || '',
+      category: item.category || '',
+      era: item.era || '',
+      condition: item.condition || '',
+    })
+    setEditingId(item.id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -246,7 +284,23 @@ function Dashboard({ session }) {
 
         {/* Add item form */}
         <div className="bg-card border border-border rounded-2xl p-7">
-          <h2 className="font-display font-semibold text-white text-lg mb-6">Add New Item</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-display font-semibold text-white text-lg">
+              {editingId ? 'Edit Item' : 'Add New Item'}
+            </h2>
+            {editingId && (
+              <button
+                onClick={() => {
+                  setForm(EMPTY_FORM)
+                  setEditingId(null)
+                  setMessage(null)
+                }}
+                className="text-xs px-3 py-1.5 rounded-lg border border-border text-white/50 hover:text-white/70 transition-all"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
 
           <div className="space-y-5">
             <Field label="Title - Swedish (SV)">
@@ -378,13 +432,15 @@ function Dashboard({ session }) {
             )}
 
             <div className="flex gap-3 pt-1">
-              <button onClick={() => save('draft')} disabled={saving}
-                className="flex-1 py-3 rounded-xl border border-border text-white/60 font-semibold text-sm hover:border-white/30 hover:text-white transition-all disabled:opacity-40">
-                {saving ? 'Saving...' : 'Save as Draft'}
-              </button>
-              <button onClick={() => save('published')} disabled={saving}
+              {!editingId && (
+                <button onClick={() => save('draft')} disabled={saving}
+                  className="flex-1 py-3 rounded-xl border border-border text-white/60 font-semibold text-sm hover:border-white/30 hover:text-white transition-all disabled:opacity-40">
+                  {saving ? 'Saving...' : 'Save as Draft'}
+                </button>
+              )}
+              <button onClick={() => save(editingId ? form.status || 'published' : 'published')} disabled={saving}
                 className="flex-1 py-3 rounded-xl bg-magenta text-white font-semibold text-sm shadow-neon hover:shadow-[0_0_36px_rgba(255,0,110,0.55)] transition-all disabled:opacity-40">
-                {saving ? 'Publishing...' : 'Publish'}
+                {saving ? (editingId ? 'Updating...' : 'Publishing...') : (editingId ? 'Update' : 'Publish')}
               </button>
             </div>
           </div>
@@ -400,7 +456,7 @@ function Dashboard({ session }) {
             <div>
               {items.map(item => (
                 <ItemRow key={item.id} item={item}
-                  onToggle={toggleStatus} onDelete={deleteItem} />
+                  onToggle={toggleStatus} onDelete={deleteItem} onEdit={editItem} />
               ))}
             </div>
           </div>
