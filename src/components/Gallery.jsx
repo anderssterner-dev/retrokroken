@@ -125,7 +125,7 @@ export default function Gallery({ showFooterCta = false, variant = 'dark', custo
   useEffect(() => {
     supabase
       .from('items')
-      .select('id, title, object_code, description, main_category, category, era, condition, image_url, created_at')
+      .select('id, title, object_code, description, description_sv, description_no, description_en, main_category, category, era, condition, image_url, created_at')
       .eq('status', 'published')
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -162,7 +162,9 @@ export default function Gallery({ showFooterCta = false, variant = 'dark', custo
     document.querySelectorAll('#gallery .reveal:not(.visible)').forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()
-  }, [items, loading, selectedMainCategory, selectedSubcategory])
+  }, [items, loading, search, selectedMainCategory, selectedSubcategory, showNewOnly])
+
+  const normalize = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/g, '').toLowerCase()
 
   const filteredItems = items.filter((item) => {
     const matchesMain = !selectedMainCategory || item.main_category === selectedMainCategory
@@ -170,8 +172,9 @@ export default function Gallery({ showFooterCta = false, variant = 'dark', custo
     const haystack = [item.title, item.description_sv, item.description_no, item.description_en, item.main_category, item.category, item.era, item.condition]
       .filter(Boolean)
       .join(' ')
-      .toLowerCase()
-    const matchesSearch = !search.trim() || haystack.includes(search.trim().toLowerCase())
+    const normalizedHaystack = normalize(haystack)
+    const normalizedSearch = normalize(search.trim())
+    const matchesSearch = !search.trim() || normalizedHaystack.includes(normalizedSearch)
 
     let matchesNew = true
     if (showNewOnly) {
