@@ -167,7 +167,7 @@ export default function Gallery({ showFooterCta = false, variant = 'dark', custo
   const filteredItems = items.filter((item) => {
     const matchesMain = !selectedMainCategory || item.main_category === selectedMainCategory
     const matchesSub = !selectedSubcategory || item.category === selectedSubcategory
-    const haystack = [item.title, item.description, item.main_category, item.category, item.era, item.condition]
+    const haystack = [item.title, item.description_sv, item.description_no, item.description_en, item.main_category, item.category, item.era, item.condition]
       .filter(Boolean)
       .join(' ')
       .toLowerCase()
