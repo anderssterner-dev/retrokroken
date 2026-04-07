@@ -534,7 +534,7 @@
 
 @media (max-width: 640px) {
   .hero-horizon-line {
-    bottom: 18.5%;
+    bottom: 25%;
   }
 
   .hero-perspective-grid {
@@ -544,8 +544,15 @@
   }
 
   .hero-cta-dock {
-    bottom: 25.5%;
+    bottom: 59%;
     padding: 0 1rem;
+  }
+
+  .hero-synth-sun {
+    bottom: 50% !important;
+    left: auto !important;
+    right: 2.6rem !important;
+    transform: none !important;
   }
 
   .hero-vhs-cta {
@@ -555,7 +562,12 @@
   }
 
   .hero-vhs-cta__label {
-    font-size: 0.76rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-vhs-cta__label--oj {
+    font-size: 2rem !important;
+    margin-left: -2rem !important;
   }
 
   .hero-vhs-cta__brand {
@@ -574,6 +586,35 @@
     margin-left: 0.55rem;
     width: 1.6rem;
     height: 1.6rem;
+  }
+
+  #hero > .relative {
+    margin-top: -20rem !important;
+  }
+
+  #hero > .relative h1 {
+    margin-top: 0;
+  }
+
+  footer {
+    transform: translateY(-25rem) !important;
+    padding: 0 !important;
+  }
+
+  .hero-top-badge {
+    margin-top: -30px !important;
+  }
+
+  .hero-deco-line-1 {
+    top: 48% !important;
+  }
+
+  .hero-deco-line-2-copy {
+    top: calc(46% + 5px) !important;
+  }
+
+  .hero-deco-line-4 {
+    top: 41% !important;
   }
 }
 
@@ -633,7 +674,7 @@
   }
 
   .hero-horizon-line {
-    bottom: 20%;
+    bottom: 27%;
   }
 
   .hero-perspective-grid {

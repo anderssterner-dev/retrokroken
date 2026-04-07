@@ -74,8 +74,11 @@ export default function Hero() {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-cyan/8 blur-[100px] pointer-events-none" />
 
       {/* Decorative horizontal lines */}
-      <div className="absolute inset-x-0 top-[40%] h-px bg-gradient-to-r from-transparent via-magenta/30 to-transparent" />
-      <div className="absolute inset-x-0 top-[42%] h-px bg-gradient-to-r from-transparent via-cyan/20 to-transparent" />
+      <div className="hero-deco-line-2 absolute inset-x-0 top-[42%] h-px bg-gradient-to-r from-transparent via-cyan/20 to-transparent" />
+      <div className="hero-deco-line-1 absolute inset-x-0 top-[40%] h-px bg-gradient-to-r from-transparent via-magenta/30 to-transparent" />
+      <div className="hero-deco-line-2-copy absolute inset-x-0 top-[46%] h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent z-50" />
+      <div className="hero-deco-line-3-magenta absolute inset-x-0 top-[45%] h-1 bg-gradient-to-r from-transparent via-magenta/60 to-transparent z-51" />
+      <div className="hero-deco-line-4 absolute inset-x-0 top-[41%] h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent z-50" />
 
       {/* All content sits above VHS layers (z-10) */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center -translate-y-12 md:-translate-y-8">
