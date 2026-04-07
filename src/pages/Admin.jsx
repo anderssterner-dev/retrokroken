@@ -133,6 +133,7 @@ function ItemRow({ item, onToggle, onDelete, onEdit }) {
 function Dashboard({ session }) {
   const [form,         setForm]         = useState(EMPTY_FORM)
   const [editingId,    setEditingId]    = useState(null)
+  const [existingImages, setExistingImages] = useState({ image_url: null, gallery_images: [] })
   const [imageFiles,   setImageFiles]   = useState([])
   const [imagePreviews, setImagePreviews] = useState([])
   const [items,        setItems]        = useState([])
@@ -202,6 +203,10 @@ function Dashboard({ session }) {
       if (uploadedUrls.length > 0) {
         payload.image_url = uploadedUrls[0]
         payload.gallery_images = uploadedUrls.slice(1)
+      } else if (editingId) {
+        // Keep existing images if not uploading new ones
+        payload.image_url = existingImages.image_url
+        payload.gallery_images = existingImages.gallery_images
       }
 
       let error
@@ -217,6 +222,7 @@ function Dashboard({ session }) {
       setMessage(editingId ? 'Item updated!' : (status === 'published' ? 'Item published!' : 'Saved as draft.'))
       setForm(EMPTY_FORM)
       setEditingId(null)
+      setExistingImages({ image_url: null, gallery_images: [] })
       imagePreviews.forEach((preview) => URL.revokeObjectURL(preview))
       setImageFiles([])
       setImagePreviews([])
@@ -253,7 +259,14 @@ function Dashboard({ session }) {
       era: item.era || '',
       condition: item.condition || '',
     })
+    setExistingImages({
+      image_url: item.image_url || null,
+      gallery_images: item.gallery_images || [],
+    })
     setEditingId(item.id)
+    setImageFiles([])
+    setImagePreviews([])
+    if (fileRef.current) fileRef.current.value = ''
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -293,6 +306,7 @@ function Dashboard({ session }) {
                 onClick={() => {
                   setForm(EMPTY_FORM)
                   setEditingId(null)
+                  setExistingImages({ image_url: null, gallery_images: [] })
                   setMessage(null)
                 }}
                 className="text-xs px-3 py-1.5 rounded-lg border border-border text-white/50 hover:text-white/70 transition-all"
