@@ -132,7 +132,7 @@ function ItemRow({ item, onToggle, onDelete, onEdit }) {
 // ── Main admin dashboard ──────────────────────────────────────────────────────
 
 function Dashboard({ session }) {
-  const { lang } = useLang()
+  const { lang, setLang, languages } = useLang()
   const [form,         setForm]         = useState(EMPTY_FORM)
   const [editingId,    setEditingId]    = useState(null)
   const [existingImages, setExistingImages] = useState({ image_url: null, gallery_images: [] })
@@ -286,6 +286,21 @@ function Dashboard({ session }) {
             <p className="text-white/30 text-xs mt-0.5">{session.user.email}</p>
           </div>
           <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 rounded-full px-1 py-0.5 border border-border">
+              {languages.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full transition-all ${
+                    lang === l
+                      ? 'bg-magenta text-white'
+                      : 'text-white/40 hover:text-white'
+                  }`}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
             <a href="/" className="text-xs text-white/40 hover:text-white transition-colors">
               View site
             </a>
