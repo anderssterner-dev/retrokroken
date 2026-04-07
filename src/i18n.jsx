@@ -1,0 +1,315 @@
+import { createContext, useContext, useState } from 'react'
+
+const translations = {
+  sv: {
+    nav: {
+      home: 'Hem',
+      collection: 'Objekt',
+      contact: 'Kontakt',
+      shopNow: 'Se objekt',
+    },
+    hero: {
+      badge: 'Upptäck retroskatter - Lägg ditt bud',
+      tagline: 'Upptäck Retro Skatter - Lägg Ditt Bud',
+      cta: 'Se objekt',
+      ctaSecondary: 'Kontakta Oss',
+      scroll: 'Scrolla',
+    },
+    gallery: {
+      label: 'Utvalda',
+      title: 'Objekt',
+      subtitle: 'Utvalda pjäser från en annan era, skapade för nutiden.',
+      viewAll: 'Kontakta oss',
+      bid: 'Lägg bud på detta objekt',
+      openObject: 'Se objekt',
+    },
+    catalog: {
+      searchPlaceholder: 'Sok bland objekt',
+      browseBy: 'Kategorier',
+      allCategories: 'Alla kategorier',
+      newItems: 'Nytt',
+      newestAdditions: 'Senaste tillägg',
+      subcategories: 'Underkategorier',
+      noMatches: 'Inga objekt matchar din sokning.',
+      showing: 'Visar',
+      results: 'objekt',
+    },
+    modal: {
+      title: 'Lägg ditt bud',
+      amountLabel: 'Budbelopp (kr)',
+      amountPlaceholder: 'Ex. 500',
+      emailLabel: 'Din e-postadress',
+      emailPlaceholder: 'du@exempel.se',
+      spamNote:
+        'Vi delar aldrig din e-post med tredje part. Du kontaktas endast angående detta bud.',
+      submit: 'Skicka bud',
+      confirmation: 'Tack för ditt bud! Vi återkommer inom kort.',
+    },
+    bidList: {
+      cta: 'Budlista',
+      title: 'Budlista',
+      subtitle: 'Samla flera bud i ett mail',
+      empty: 'Du har inte lagt till några objekt ännu.',
+      explainerTitle: 'Tips! Vill du lägga bud på flera objekt? Lägg till dem i Budlistan och skicka alla bud samtidigt.',
+      explainerSteps: '1. Lagg till alla objekt du ar intresserad av. 2. Skriv ditt bud pa varje objekt. 3. Skicka allt i ett och samma bud.',
+      floatingHelp: 'Vill du lägga bud på flera objekt? Lägg till dem i Budlistan och skicka alla bud samtidigt.',
+      addAction: 'Lägg till',
+      added: 'Tillagd',
+      remove: 'Ta bort',
+      noteLabel: 'Meddelande',
+      notePlaceholder: 'Valfritt meddelande till Retrokroken',
+      helper: 'Först försöker sidan skicka budet direkt via Supabase. Om det inte är konfigurerat öppnas ett mail som reservlösning.',
+      clear: 'Rensa',
+      submit: 'Skicka mail',
+      submitting: 'Skickar...',
+      success: 'Budet är skickat och sparat.',
+      fallback: 'Direktutskick är inte klart ännu. Ett färdigt mail öppnas i stället.',
+    },
+    objectDetail: {
+      bidHelp: 'Vill du lägga bud på flera objekt? Lägg till dem i Budlistan och skicka alla bud samtidigt.',
+      era: 'År',
+      condition: 'Skick',
+      closeImage: 'Klicka för att stänga',
+      description: 'Objektbeskrivning',
+    },
+    contact: {
+      label: 'Kontakt',
+      title: 'Kontakta Oss',
+      subtitle: 'Frågor? Vi hör gärna från dig.',
+      noBidsNote: 'Skicka inte bud här. Budgivning sker endast via budlistan.',
+      namePlaceholder: 'Ditt namn',
+      emailLabel: 'Din e-postadress',
+      emailPlaceholder: 'du@exempel.se',
+      messageLabel: 'Meddelande',
+      messagePlaceholder: 'Skriv ditt meddelande här...',
+      submit: 'Skicka meddelande',
+      sent: 'Meddelande Skickat',
+      sentSub: 'Vi återkommer snart.',
+    },
+    footer: {
+      tagline: 'Fynd från förr',
+      navLabel: 'Navigering',
+      newsletterTitle: 'Håll dig uppdaterad',
+      newsletterSub: 'Nya fynd, exklusiva pjäser, retroklassiker.',
+      newsletterPlaceholder: 'din@email.se',
+      join: 'Gå med',
+      rights: 'Alla rättigheter förbehållna.',
+    },
+  },
+
+  no: {
+    nav: {
+      home: 'Hjem',
+      collection: 'Objekter',
+      contact: 'Kontakt',
+      shopNow: 'Se objekter',
+    },
+    hero: {
+      badge: 'Oppdag retroskatter - Legg inn bud',
+      tagline: 'Oppdag Retro Skatter - Legg Inn Bud',
+      cta: 'Se objekter',
+      ctaSecondary: 'Kontakt Oss',
+      scroll: 'Skroll',
+    },
+    gallery: {
+      label: 'Utvalgte',
+      title: 'Objekter',
+      subtitle: 'Utvalgte plagg fra en annen tid, laget for nåtiden.',
+      viewAll: 'Kontakt oss',
+      bid: 'Legg bud på dette objektet',
+      openObject: 'Se objekt',
+    },
+    catalog: {
+      searchPlaceholder: 'Sok blant objekter',
+      browseBy: 'Kategorier',
+      allCategories: 'Alle kategorier',
+      newItems: 'Nytt',
+      newestAdditions: 'Nyeste tillegg',
+      subcategories: 'Underkategorier',
+      noMatches: 'Ingen objekter matcher soket ditt.',
+      showing: 'Viser',
+      results: 'objekter',
+    },
+    modal: {
+      title: 'Legg inn ditt bud',
+      amountLabel: 'Budbeløp (kr)',
+      amountPlaceholder: 'F.eks. 500',
+      emailLabel: 'Din e-postadresse',
+      emailPlaceholder: 'du@eksempel.no',
+      spamNote:
+        'Vi deler aldri e-posten din med tredjeparter. Du kontaktes kun angående dette budet.',
+      submit: 'Send bud',
+      confirmation: 'Takk for ditt bud! Vi kommer tilbake til deg snart.',
+    },
+    bidList: {
+      cta: 'Budliste',
+      title: 'Budliste',
+      subtitle: 'Samle flere bud i en e-post',
+      empty: 'Du har ikke lagt til noen objekter ennå.',
+      explainerTitle: 'Tips! Vil du legge inn bud på flere objekter? Legg dem til i Budlisten og send alle budene samtidig.',
+      explainerSteps: '1. Legg til alle objektene du er interessert i. 2. Skriv inn budet ditt for hvert objekt. 3. Send alt samlet i én og samme foresporsel.',
+      floatingHelp: 'Tips! Vil du legge inn bud på flere objekter? Legg dem til i Budlisten og send alle budene samtidig.',
+      addAction: 'Legg til',
+      added: 'Lagt til',
+      remove: 'Fjern',
+      noteLabel: 'Melding',
+      notePlaceholder: 'Valgfri melding til Retrokroken',
+      helper: 'Siden prøver først å sende budet direkte via Supabase. Hvis det ikke er konfigurert, åpnes en e-post som reserve.',
+      clear: 'Tøm',
+      submit: 'Send e-post',
+      submitting: 'Sender...',
+      success: 'Budet er sendt og lagret.',
+      fallback: 'Direktesending er ikke klar ennå. En ferdig e-post åpnes i stedet.',
+    },
+    objectDetail: {
+      bidHelp: 'Vil du legge inn bud på flere objekter? Legg dem til i Budlisten og send alle budene samtidig.',
+      era: 'År',
+      condition: 'Tilstand',
+      closeImage: 'Klikk for å lukke',
+      description: 'Objektbeskrivelse',
+    },
+    contact: {
+      label: 'Kontakt',
+      title: 'Kontakt Oss',
+      subtitle: 'Spørsmål? Vi hører gjerne fra deg.',
+      noBidsNote: 'Ikke send bud her. Budgivning skjer kun via budlisten.',
+      namePlaceholder: 'Ditt navn',
+      emailLabel: 'Din e-postadresse',
+      emailPlaceholder: 'du@eksempel.no',
+      messageLabel: 'Melding',
+      messagePlaceholder: 'Skriv meldingen din her...',
+      submit: 'Send melding',
+      sent: 'Melding Sendt',
+      sentSub: 'Vi kommer tilbake snart.',
+    },
+    footer: {
+      tagline: 'Funn fra før',
+      navLabel: 'Navigasjon',
+      newsletterTitle: 'Hold deg oppdatert',
+      newsletterSub: 'Nye funn, eksklusive plagg, retroklassikere.',
+      newsletterPlaceholder: 'din@epost.no',
+      join: 'Bli med',
+      rights: 'Alle rettigheter forbeholdt.',
+    },
+  },
+
+  en: {
+    nav: {
+      home: 'Home',
+      collection: 'Objects',
+      contact: 'Contact',
+      shopNow: 'View items',
+    },
+    hero: {
+      badge: 'Discover retro treasures - Make your offer',
+      tagline: 'Discover Retro Treasures - Make Your Offer',
+      cta: 'View items',
+      ctaSecondary: 'Get in Touch',
+      scroll: 'Scroll',
+    },
+    gallery: {
+      label: 'Featured',
+      title: 'Objects',
+      subtitle: 'Curated pieces from another era, built for the present.',
+      viewAll: 'Contact us',
+      bid: 'Place a bid on this item',
+      openObject: 'View item',
+    },
+    catalog: {
+      searchPlaceholder: 'Search objects',
+      browseBy: 'Categories',
+      allCategories: 'All categories',
+      newItems: 'New',
+      newestAdditions: 'Newest additions',
+      subcategories: 'Subcategories',
+      noMatches: 'No objects match your search.',
+      showing: 'Showing',
+      results: 'objects',
+    },
+    modal: {
+      title: 'Place your bid',
+      amountLabel: 'Bid amount (kr)',
+      amountPlaceholder: 'e.g. 500',
+      emailLabel: 'Your email address',
+      emailPlaceholder: 'you@example.com',
+      spamNote:
+        'We never share your email with third parties. You will only be contacted regarding this bid.',
+      submit: 'Submit bid',
+      confirmation: 'Thank you for your bid! We will get back to you shortly.',
+    },
+    bidList: {
+      cta: 'Bid list',
+      title: 'Bid list',
+      subtitle: 'Collect several bids in one email',
+      empty: 'You have not added any objects yet.',
+      explainerTitle: 'How it works',
+      explainerSteps: '1. Add every object you want to bid on. 2. Enter your bid for each object. 3. Send everything together in one single request.',
+      floatingHelp: 'Collect all the objects you want in the bid list, then send all bids together.',
+      addAction: 'Add bid',
+      added: 'Added',
+      remove: 'Remove',
+      noteLabel: 'Message',
+      notePlaceholder: 'Optional message to Retrokroken',
+      helper: 'The site first tries to submit the bid directly through Supabase. If that is not configured yet, it falls back to a prepared email.',
+      clear: 'Clear',
+      submit: 'Send email',
+      submitting: 'Sending...',
+      success: 'Your bid request was sent and saved.',
+      fallback: 'Direct delivery is not configured yet. A prepared email will open instead.',
+    },
+    objectDetail: {
+      bidHelp: 'You can collect several objects in the bid list and send all bids together.',
+      era: 'Era',
+      condition: 'Condition',
+      closeImage: 'Click to close',
+      description: 'Object Description',
+    },
+    contact: {
+      label: 'Contact',
+      title: 'Get in Touch',
+      subtitle: 'Questions? We\'d love to hear from you.',
+      noBidsNote: 'Don\'t send bids here. Bidding will only be handled through the bid list.',
+      namePlaceholder: 'Your name',
+      emailLabel: 'Your email address',
+      emailPlaceholder: 'you@example.com',
+      messageLabel: 'Message',
+      messagePlaceholder: 'Write your message here...',
+      submit: 'Send Message',
+      sent: 'Message Sent',
+      sentSub: 'We\'ll get back to you soon.',
+    },
+    footer: {
+      tagline: 'Finds from the past',
+      navLabel: 'Navigation',
+      newsletterTitle: 'Stay in the loop',
+      newsletterSub: 'New drops, exclusive pieces, retro finds.',
+      newsletterPlaceholder: 'your@email.com',
+      join: 'Join',
+      rights: 'All rights reserved.',
+    },
+  },
+}
+
+function detectLang() {
+  const lang = (navigator.language || 'sv').toLowerCase()
+  if (lang.startsWith('sv')) return 'sv'
+  if (lang.startsWith('no') || lang.startsWith('nb') || lang.startsWith('nn')) return 'no'
+  if (lang.startsWith('en')) return 'en'
+  return 'sv' // default
+}
+
+const LangContext = createContext(null)
+
+export function LangProvider({ children }) {
+  const [lang, setLang] = useState(detectLang)
+  const t = translations[lang]
+  return (
+    <LangContext.Provider value={{ lang, setLang, t, languages: ['sv', 'no', 'en'] }}>
+      {children}
+    </LangContext.Provider>
+  )
+}
+
+export function useLang() {
+  return useContext(LangContext)
+}

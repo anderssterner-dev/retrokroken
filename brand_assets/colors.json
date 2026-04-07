@@ -1,0 +1,30 @@
+{
+  "palette": {
+    "primary": {
+      "name": "Neon Magenta",
+      "hex": "#FF006E",
+      "usage": "Button accents, highlights, neon glow effects"
+    },
+    "secondary": {
+      "name": "Neon Cyan", 
+      "hex": "#00D9FF",
+      "usage": "Borders, secondary accents, decorative elements"
+    },
+    "background": {
+      "name": "Deep Purple",
+      "hex": "#0A0E27",
+      "usage": "Main page background, dark sections"
+    },
+    "surface": {
+      "name": "White",
+      "hex": "#FFFFFF",
+      "usage": "Product cards, content containers"
+    },
+    "text": {
+      "dark": "#1A1A2E",
+      "light": "#FFFFFF"
+    }
+  },
+  "style": "Synthwave - 80s retro neon vibe",
+  "mood": "Warm, nostalgic, product-focused"
+}
