@@ -185,7 +185,7 @@ export default function Gallery({ showFooterCta = false, variant = 'dark', custo
   })
 
   return (
-    <section id="gallery" className={`py-24 px-6 ${isLight ? 'bg-white' : ''}`}>
+    <section id="gallery" className={`py-16 md:py-24 px-6 ${isLight ? 'bg-white' : ''}`}>
       <div className="max-w-6xl mx-auto">
         <div className={`reveal mb-10 ${isLight ? 'pt-6 pb-2 border-b border-border-light' : ''}`}>
           <span className="text-xs font-medium text-magenta tracking-widest uppercase">

@@ -14,11 +14,12 @@ export default function Objects() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="bg-bg pt-16">
       <Navbar />
-      <main className="-mt-16">
+      <main>
         <Gallery customLabel="Retrokroken" customTitle="Objekt" hideSubtitle />
       </main>
+      <div className="pb-96 md:pb-64" />
       <Footer />
     </div>
   )
