@@ -51,13 +51,11 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen md:min-h-[74vh] flex items-center justify-center overflow-hidden"
     >
-      {/* Neon Collectibles sign */}
-      <div className="absolute inset-0 flex items-center z-20 pointer-events-none" style={{ justifyContent: 'calc(50% - 2rem)' }}>
-        <img
-          src="/sign.png"
-          alt="Collectibles sign"
-          className="w-80 md:w-[28rem] lg:w-[36rem] h-auto -translate-y-80 md:-translate-y-56 drop-shadow-[0_0_40px_rgba(255,0,110,0.6)]"
-        />
+      <div className="hero-top-badge">
+        <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
+        <span className="text-xs font-medium text-cyan tracking-widest uppercase whitespace-nowrap">
+          {t.hero.badge}
+        </span>
       </div>
 
       {/* ── Hero-scoped VHS layers (clipped to this section) ── */}
@@ -90,7 +88,8 @@ export default function Hero() {
             <span className="hero-retro-wordmark block text-3xl md:text-5xl lg:text-6xl text-white">
               RETRO
             </span>
-            <span className="block mt-2 font-display font-bold text-6xl md:text-8xl lg:text-9xl text-gradient-magenta tracking-tight animate-glow">
+            <span className="block mt-2 font-bold text-6xl md:text-8xl lg:text-9xl text-gradient-magenta tracking-tight animate-glow"
+              style={{ fontFamily: '"Audiowide", sans-serif' }}>
               KROKEN
             </span>
           </h1>

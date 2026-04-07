@@ -19,6 +19,7 @@ export default {
         body: ['"Inter"', 'sans-serif'],
         pixel: ['"Press Start 2P"', 'monospace'],
         vcr: ['"VCR OSD Mono"', '"Press Start 2P"', 'monospace'],
+        ethnocentric: ['"Audiowide"', 'sans-serif'],
       },
       boxShadow: {
         neon: '0 0 24px rgba(255,0,140,0.35)',
