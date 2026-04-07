@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { CATEGORY_TREE, MAIN_CATEGORIES, findMainCategoryForSubcategory } from '../lib/categories'
 
-const EMPTY_FORM = { title: '', object_code: '', description_sv: '', description_no: '', description_en: '', main_category: '', category: '', era: '', condition: '' }
+const EMPTY_FORM = { title_sv: '', title_no: '', title_en: '', object_code: '', description_sv: '', description_no: '', description_en: '', main_category: '', category: '', era: '', condition: '' }
 
 // ── Small UI helpers ──────────────────────────────────────────────────────────
 
@@ -173,7 +173,7 @@ function Dashboard({ session }) {
   }
 
   async function save(status) {
-    if (!form.title.trim()) { setMessage('Title is required.'); return }
+    if (!form.title_sv.trim() && !form.title_no.trim() && !form.title_en.trim()) { setMessage('At least one title is required.'); return }
     if (!form.main_category || !form.category) {
       setMessage('Choose a main category and subcategory.')
       return
@@ -184,8 +184,10 @@ function Dashboard({ session }) {
       const uploadedUrls = await uploadImages()
       const image_url = uploadedUrls[0] || null
       const gallery_images = uploadedUrls.slice(1)
+      const title = form.title_sv.trim() || form.title_no.trim() || form.title_en.trim()
       const payload = {
         ...form,
+        title,
         object_code: form.object_code.trim() || null,
         image_url,
         gallery_images,
@@ -247,10 +249,22 @@ function Dashboard({ session }) {
           <h2 className="font-display font-semibold text-white text-lg mb-6">Add New Item</h2>
 
           <div className="space-y-5">
-            <Field label="Title *">
-              <input type="text" value={form.title}
-                onChange={e => setForm({ ...form, title: e.target.value })}
-                placeholder="e.g. Vintage Leather Jacket" className={inputCls} />
+            <Field label="Title - Swedish (SV)">
+              <input type="text" value={form.title_sv}
+                onChange={e => setForm({ ...form, title_sv: e.target.value })}
+                placeholder="Swedish title..." className={inputCls} />
+            </Field>
+
+            <Field label="Title - Norwegian (NO)">
+              <input type="text" value={form.title_no}
+                onChange={e => setForm({ ...form, title_no: e.target.value })}
+                placeholder="Norwegian title..." className={inputCls} />
+            </Field>
+
+            <Field label="Title - English (EN)">
+              <input type="text" value={form.title_en}
+                onChange={e => setForm({ ...form, title_en: e.target.value })}
+                placeholder="English title..." className={inputCls} />
             </Field>
 
             <Field label="Object code">
