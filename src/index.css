@@ -602,7 +602,7 @@
   }
 
   .hero-top-badge {
-    margin-top: -40px !important;
+    margin-top: -50px !important;
   }
 
   .hero-deco-line-1 {
@@ -611,6 +611,10 @@
 
   .hero-deco-line-2-copy {
     top: calc(46% + 5px) !important;
+  }
+
+  .hero-deco-line-3-magenta {
+    top: calc(45% + 6px) !important;
   }
 
   .hero-deco-line-4 {
