@@ -44,9 +44,6 @@ export default function Contact() {
       <div className="relative z-10 max-w-xl mx-auto">
         {/* Header */}
         <div className="reveal text-center mb-12">
-          <span className="text-xs font-medium text-cyan tracking-widest uppercase">
-            {t.contact.label}
-          </span>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-white mt-3 mb-4">
             {t.contact.title}
           </h2>

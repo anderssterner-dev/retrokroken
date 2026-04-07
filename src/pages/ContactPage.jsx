@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-bg">
       <Navbar />
-      <main className="-mt-16">
+      <main className="pt-4">
         <Contact />
       </main>
       <Footer />
