@@ -555,7 +555,7 @@
   }
 
   .hero-vhs-cta__label {
-    font-size: 0.76rem;
+    font-size: 1.4rem;
   }
 
   .hero-vhs-cta__brand {
@@ -574,6 +574,10 @@
     margin-left: 0.55rem;
     width: 1.6rem;
     height: 1.6rem;
+  }
+
+  .hero-top-badge {
+    top: 1rem;
   }
 }
 

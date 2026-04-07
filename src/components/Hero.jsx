@@ -78,7 +78,7 @@ export default function Hero() {
       <div className="absolute inset-x-0 top-[42%] h-px bg-gradient-to-r from-transparent via-cyan/20 to-transparent" />
 
       {/* All content sits above VHS layers (z-10) */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center -translate-y-12 md:-translate-y-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center translate-y-8 sm:translate-y-0 md:-translate-y-8">
         {/* ── Glitch target: title only ── */}
         <div ref={textRef}>
           <h1 className="leading-none mb-4 md:mb-6">
