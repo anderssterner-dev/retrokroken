@@ -19,7 +19,9 @@ export default function Landing() {
       <main className="flex-1 flex flex-col">
         <Hero />
       </main>
-      <Footer />
+      <div className="mt-12" style={{ marginTop: 'calc(3rem - 8px)' }}>
+        <Footer />
+      </div>
     </div>
   )
 }
