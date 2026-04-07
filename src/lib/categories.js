@@ -31,6 +31,7 @@ const CATEGORIES_BY_LANG = {
       'T-shirts': 'T-shirts',
       'Kepsar': 'Kepsar',
       'Muggar': 'Muggar',
+      'Burkar': 'Burkar',
       'Misc': 'Misc',
     }
   },
@@ -65,6 +66,7 @@ const CATEGORIES_BY_LANG = {
       'T-shirts': 'T-skjorter',
       'Kepsar': 'Caps',
       'Muggar': 'Kopper',
+      'Burkar': 'Bokser',
       'Misc': 'Diverse',
     }
   },
@@ -99,6 +101,7 @@ const CATEGORIES_BY_LANG = {
       'T-shirts': 'T-shirts',
       'Kepsar': 'Caps',
       'Muggar': 'Mugs',
+      'Burkar': 'Cans',
       'Misc': 'Miscellaneous',
     }
   }
@@ -110,7 +113,7 @@ export const CATEGORY_TREE = {
   'Bocker och trycksaker': ['Bocker', 'Serietidningar', 'Tidningar och magasin'],
   'Film och musik': ['DVD', 'Blu-ray', 'Vinyl', 'CD'],
   'Klader och accessoarer': ['T-shirts', 'Kepsar'],
-  'Hem och prylar': ['Muggar'],
+  'Hem och prylar': ['Muggar', 'Burkar'],
   'Ovrigt': ['Misc'],
 }
 
