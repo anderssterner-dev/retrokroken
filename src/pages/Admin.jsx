@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
-import { CATEGORY_TREE, MAIN_CATEGORIES, findMainCategoryForSubcategory } from '../lib/categories'
+import { CATEGORY_TREE, MAIN_CATEGORIES, findMainCategoryForSubcategory, translateCategory } from '../lib/categories'
+import { useLang } from '../i18n'
 
 const EMPTY_FORM = { title_sv: '', title_no: '', title_en: '', object_code: '', description_sv: '', description_no: '', description_en: '', main_category: '', category: '', era: '', condition: '' }
 
@@ -131,6 +132,7 @@ function ItemRow({ item, onToggle, onDelete, onEdit }) {
 // ── Main admin dashboard ──────────────────────────────────────────────────────
 
 function Dashboard({ session }) {
+  const { lang } = useLang()
   const [form,         setForm]         = useState(EMPTY_FORM)
   const [editingId,    setEditingId]    = useState(null)
   const [existingImages, setExistingImages] = useState({ image_url: null, gallery_images: [] })
@@ -372,7 +374,7 @@ function Dashboard({ session }) {
                 >
                   <option value="">Select main category</option>
                   {MAIN_CATEGORIES.map((category) => (
-                    <option key={category} value={category}>{category}</option>
+                    <option key={category} value={category}>{translateCategory(category, lang, 'main')}</option>
                   ))}
                 </select>
               </Field>
@@ -385,7 +387,7 @@ function Dashboard({ session }) {
                 >
                   <option value="">Select subcategory</option>
                   {(CATEGORY_TREE[form.main_category] || []).map((subcategory) => (
-                    <option key={subcategory} value={subcategory}>{subcategory}</option>
+                    <option key={subcategory} value={subcategory}>{translateCategory(subcategory, lang, 'sub')}</option>
                   ))}
                 </select>
               </Field>
