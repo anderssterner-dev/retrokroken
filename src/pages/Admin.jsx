@@ -418,6 +418,27 @@ function Dashboard({ session }) {
               </Field>
             </div>
 
+            {/* Show existing images when editing */}
+            {editingId && existingImages.image_url && (
+              <Field label="Current Images">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {existingImages.image_url && (
+                    <div className="relative">
+                      <img src={existingImages.image_url} alt="main" className="w-20 h-20 object-cover rounded-lg border border-border" />
+                      <span className="text-xs text-white/50 mt-1 block">Main</span>
+                    </div>
+                  )}
+                  {existingImages.gallery_images?.map((img, i) => (
+                    <div key={img} className="relative">
+                      <img src={img} alt={`gallery ${i + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
+                      <span className="text-xs text-white/50 mt-1 block">Gallery {i + 1}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-2 text-xs text-white/40">Upload new images to replace these</p>
+              </Field>
+            )}
+
             {/* Image upload */}
             <Field label="Images">
               <div
