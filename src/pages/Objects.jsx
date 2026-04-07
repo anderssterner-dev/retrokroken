@@ -16,7 +16,7 @@ export default function Objects() {
   return (
     <div className="min-h-screen bg-bg">
       <Navbar />
-      <main className="pt-16">
+      <main className="-mt-16">
         <Gallery customLabel="Retrokroken" customTitle="Objekt" hideSubtitle />
       </main>
       <Footer />
