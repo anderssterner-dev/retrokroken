@@ -51,10 +51,9 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen md:min-h-[74vh] flex items-center justify-center overflow-hidden"
     >
-      <div className="hero-top-badge">
-        <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-        <span className="text-xs font-medium text-cyan tracking-widest uppercase whitespace-nowrap">
-          {t.hero.badge}
+      <div className="hero-top-badge overflow-hidden">
+        <span className="text-lg leading-relaxed marquee-scroll" style={{ color: '#00FF00' }}>
+          {t.hero.badgeText}
         </span>
       </div>
 
@@ -68,6 +67,8 @@ export default function Hero() {
       <div className="hero-synth-sun" />
       <div className="hero-horizon-line" />
       <div className="hero-perspective-grid" />
+
+
 
       {/* Radial glow blobs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-magenta/10 blur-[120px] pointer-events-none" />

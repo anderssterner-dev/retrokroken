@@ -116,7 +116,7 @@ export default function BidDrawer() {
             <div className="flex items-center justify-between border-b border-border px-6 py-5">
               <div>
                 <h2 className="font-display text-2xl text-white">{t.bidList.title}</h2>
-                <p className="text-sm text-white/40">{t.bidList.subtitle}</p>
+                <p className="text-sm text-white/70">{t.bidList.subtitle}</p>
               </div>
               <button onClick={close} className="text-white/30 hover:text-white transition-colors" aria-label="Close bid drawer">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@ export default function BidDrawer() {
               </button>
             </div>
 
-            <div className="flex h-[calc(100%-84px)] flex-col">
+            <div className="flex h-[calc(100%-160px)] flex-col">
               <div className="flex-1 space-y-4 overflow-y-auto px-6 py-5">
                 {items.length === 0 ? (
                   <p className="rounded-2xl border border-border bg-bg/60 p-5 text-sm text-white/40">
@@ -137,7 +137,7 @@ export default function BidDrawer() {
                       <div className="mb-3 flex items-start justify-between gap-4">
                         <div>
                           <p className="font-medium text-white">{item.title}</p>
-                          <p className="text-xs text-white/35">
+                          <p className="text-xs text-white/60">
                             {[item.main_category, item.category].filter(Boolean).join(' / ')}
                             {item.object_code ? ` - ${item.object_code}` : ''}
                           </p>
@@ -145,13 +145,13 @@ export default function BidDrawer() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="text-xs text-white/35 hover:text-red-400 transition-colors"
+                          className="text-xs text-white/60 hover:text-red-400 transition-colors"
                         >
                           {t.bidList.remove}
                         </button>
                       </div>
 
-                      <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/45">
+                      <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white">
                         {t.modal.amountLabel}
                       </label>
                       <input
@@ -169,7 +169,7 @@ export default function BidDrawer() {
 
               <div className="border-t border-border px-6 py-5 space-y-4">
                 <div>
-                  <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/45">
+                  <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white">
                     {t.modal.emailLabel}
                   </label>
                   <input
@@ -177,12 +177,12 @@ export default function BidDrawer() {
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     placeholder={t.modal.emailPlaceholder}
-                    className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-sm text-white placeholder-white/20 focus:border-magenta/60 focus:outline-none transition-all"
+                    className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-sm text-white placeholder-white/50 focus:border-magenta/60 focus:outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/45">
+                  <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white">
                     {t.bidList.noteLabel}
                   </label>
                   <textarea
@@ -190,18 +190,18 @@ export default function BidDrawer() {
                     value={note}
                     onChange={(event) => setNote(event.target.value)}
                     placeholder={t.bidList.notePlaceholder}
-                    className="w-full resize-none rounded-xl border border-border bg-bg px-4 py-3 text-sm text-white placeholder-white/20 focus:border-magenta/60 focus:outline-none transition-all"
+                    className="w-full resize-none rounded-xl border border-border bg-bg px-4 py-3 text-sm text-white placeholder-white/50 focus:border-magenta/60 focus:outline-none transition-all"
                   />
                 </div>
 
-                <p className="text-xs leading-relaxed text-white/35">{t.bidList.helper}</p>
+                <p className="text-xs leading-relaxed text-white/60">{t.bidList.helper}</p>
                 {feedback && <p className="text-xs leading-relaxed text-cyan">{feedback}</p>}
 
                 <div className="flex gap-3">
                   <button
                     type="button"
                     onClick={clear}
-                    className="flex-1 rounded-xl border border-border px-4 py-3 text-sm font-semibold text-white/55 hover:text-white hover:border-white/30 transition-all"
+                    className="flex-1 rounded-xl border border-border px-4 py-3 text-sm font-semibold text-white hover:text-white hover:border-white/30 transition-all"
                   >
                     {t.bidList.clear}
                   </button>
@@ -217,6 +217,44 @@ export default function BidDrawer() {
               </div>
             </div>
           </aside>
+        </div>
+      )}
+
+      {feedback === t.bidList.success && (
+        <div
+          className="fixed inset-0 bg-black/80 z-[70] flex items-center justify-center p-4"
+          onClick={() => setFeedback(null)}
+        >
+          <div
+            className="relative bg-card border border-border rounded-3xl p-8 max-w-md w-full shadow-card"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              onClick={() => setFeedback(null)}
+              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="text-center">
+              <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-magenta/20">
+                <svg className="w-8 h-8 text-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="font-display text-2xl text-white mb-3">{t.bidList.successTitle}</h3>
+              <p className="text-white/70 leading-6 mb-6">{t.bidList.successMessage}</p>
+              <button
+                onClick={() => setFeedback(null)}
+                className="w-full rounded-xl bg-magenta px-6 py-3 text-sm font-semibold text-white shadow-neon hover:shadow-[0_0_36px_rgba(255,0,110,0.55)] transition-all"
+              >
+                Stäng
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

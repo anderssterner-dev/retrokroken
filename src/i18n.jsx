@@ -14,6 +14,11 @@ const translations = {
       cta: 'Se objekt',
       ctaSecondary: 'Kontakta Oss',
       scroll: 'Scrolla',
+      badgeText: 'Upptäck nya och gamla samlarföremål. Lägg ett bud och det kan bli ditt. Vi kan skicka från både Sverige och Norge för att hålla fraktkostnaderna nere.',
+    },
+    info: {
+      collectibles: 'Collectibles! From past to present!',
+      shipping: 'Sending nationally from Sweden and Norway',
     },
     gallery: {
       label: 'Utvalda',
@@ -64,6 +69,8 @@ const translations = {
       submitting: 'Skickar...',
       success: 'Budet är skickat och sparat.',
       fallback: 'Direktutskick är inte klart ännu. Ett färdigt mail öppnas i stället.',
+      successTitle: 'Tack för ditt bud',
+      successMessage: 'Vi granskar det och återkommer på e-postadressen du angav om det blir aktuellt.',
     },
     objectDetail: {
       bidHelp: 'Vill du lägga bud på flera objekt? Lägg till dem i Budlistan och skicka alla bud samtidigt.',
@@ -87,7 +94,7 @@ const translations = {
       sentSub: 'Vi återkommer snart.',
     },
     footer: {
-      tagline: 'Fynd från förr',
+      tagline: 'Shipping from Norway & Sweden',
       navLabel: 'Navigering',
       newsletterTitle: 'Håll dig uppdaterad',
       newsletterSub: 'Nya fynd, exklusiva pjäser, retroklassiker.',
@@ -110,6 +117,11 @@ const translations = {
       cta: 'Se objekter',
       ctaSecondary: 'Kontakt Oss',
       scroll: 'Skroll',
+      badgeText: 'Oppdag nye og gamle samlegjenstander. Legg inn et bud og det kan bli ditt. Vi kan sende fra både Sverige og Norge for å holde fraktkostnadene nede.',
+    },
+    info: {
+      collectibles: 'Collectibles! From past to present!',
+      shipping: 'Sending nationally from Sweden and Norway',
     },
     gallery: {
       label: 'Utvalgte',
@@ -160,6 +172,8 @@ const translations = {
       submitting: 'Sender...',
       success: 'Budet er sendt og lagret.',
       fallback: 'Direktesending er ikke klar ennå. En ferdig e-post åpnes i stedet.',
+      successTitle: 'Takk for budet ditt',
+      successMessage: 'Vi vurderer det og kontakter deg på e-postadressen du oppgav hvis det blir aktuelt.',
     },
     objectDetail: {
       bidHelp: 'Vil du legge inn bud på flere objekter? Legg dem til i Budlisten og send alle budene samtidig.',
@@ -183,7 +197,7 @@ const translations = {
       sentSub: 'Vi kommer tilbake snart.',
     },
     footer: {
-      tagline: 'Funn fra før',
+      tagline: 'Shipping from Norway & Sweden',
       navLabel: 'Navigasjon',
       newsletterTitle: 'Hold deg oppdatert',
       newsletterSub: 'Nye funn, eksklusive plagg, retroklassikere.',
@@ -206,6 +220,11 @@ const translations = {
       cta: 'View items',
       ctaSecondary: 'Get in Touch',
       scroll: 'Scroll',
+      badgeText: 'Discover collectibles from past and present. Make a bid and it could be yours. Shipping internationally from Sweden or Norway. International shipping fees and applicable customs charges apply.',
+    },
+    info: {
+      collectibles: 'Collectibles! From past to present!',
+      shipping: 'Shipping nationally from Sweden and Norway',
     },
     gallery: {
       label: 'Featured',
@@ -256,6 +275,8 @@ const translations = {
       submitting: 'Sending...',
       success: 'Your bid request was sent and saved.',
       fallback: 'Direct delivery is not configured yet. A prepared email will open instead.',
+      successTitle: 'Thank you for your bid',
+      successMessage: 'We will review it and contact you at the email address you provided if it becomes relevant.',
     },
     objectDetail: {
       bidHelp: 'You can collect several objects in the bid list and send all bids together.',
@@ -279,7 +300,7 @@ const translations = {
       sentSub: 'We\'ll get back to you soon.',
     },
     footer: {
-      tagline: 'Finds from the past',
+      tagline: 'Shipping from Norway & Sweden',
       navLabel: 'Navigation',
       newsletterTitle: 'Stay in the loop',
       newsletterSub: 'New drops, exclusive pieces, retro finds.',
@@ -291,11 +312,11 @@ const translations = {
 }
 
 function detectLang() {
-  const lang = (navigator.language || 'sv').toLowerCase()
+  const lang = (navigator.language || 'en').toLowerCase()
   if (lang.startsWith('sv')) return 'sv'
   if (lang.startsWith('no') || lang.startsWith('nb') || lang.startsWith('nn')) return 'no'
   if (lang.startsWith('en')) return 'en'
-  return 'sv' // default
+  return 'en' // default
 }
 
 const LangContext = createContext(null)

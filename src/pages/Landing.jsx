@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 
 export default function Landing() {
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),

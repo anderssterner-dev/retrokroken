@@ -63,7 +63,7 @@ export default function ObjectDetail() {
           ) : (
             <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-6 items-start">
               <div className="space-y-4">
-                <div className="relative rounded-3xl border border-border bg-card overflow-hidden shadow-card w-full aspect-square cursor-pointer" onClick={() => selectedImage && setImagePopupOpen(true)}>
+                <div className="relative rounded-3xl border border-border bg-card overflow-hidden shadow-card w-full aspect-[4/5] cursor-pointer" onClick={() => selectedImage && setImagePopupOpen(true)}>
                   {selectedImage ? (
                     <img src={selectedImage} alt={item.title} className="w-full h-full object-cover" />
                   ) : (

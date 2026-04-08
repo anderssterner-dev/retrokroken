@@ -9,18 +9,16 @@ function ProductCard({ item, index, variant = 'dark' }) {
   const { t } = useLang()
   const { addItem, hasItem } = useBidBasket()
   const isLight = variant === 'light'
-  const accent      = index % 2 === 0 ? 'magenta' : 'cyan'
-  const accentColor = accent === 'magenta' ? '#FF008C' : '#00F5D4'
-  const accentClass = accent === 'magenta' ? 'text-magenta' : 'text-cyan'
-  const borderHover = accent === 'magenta'
+  const accentColor = index % 2 === 0 ? '#FF008C' : '#00F5D4'
+  const borderHover = index % 2 === 0
     ? 'hover:border-magenta/60 hover:shadow-neon'
     : 'hover:border-cyan/60 hover:shadow-neon-cyan'
-  const ctaClass = accent === 'magenta'
-    ? isLight ? 'border-magenta/50 text-magenta hover:bg-magenta hover:text-white' : 'border-magenta/50 text-magenta hover:bg-magenta hover:text-white'
-    : isLight ? 'border-cyan/50 text-cyan hover:bg-cyan hover:text-ink' : 'border-cyan/50 text-cyan hover:bg-cyan hover:text-bg'
-  const secondaryCtaClass = accent === 'magenta'
+  const ctaClass = isLight
+    ? 'border-white/50 text-white hover:bg-white hover:text-ink'
+    : 'border-white/50 text-white hover:bg-white hover:text-bg'
+  const secondaryCtaClass = isLight
     ? 'bg-magenta text-white hover:shadow-[0_0_28px_rgba(255,0,110,0.45)]'
-    : isLight ? 'bg-cyan text-ink hover:shadow-[0_0_28px_rgba(0,245,212,0.35)]' : 'bg-cyan text-bg hover:shadow-[0_0_28px_rgba(0,245,212,0.35)]'
+    : 'bg-magenta text-white hover:shadow-[0_0_28px_rgba(255,0,110,0.45)]'
   const alreadyAdded = hasItem(item.id)
 
   return (
@@ -29,7 +27,7 @@ function ProductCard({ item, index, variant = 'dark' }) {
       style={{ transitionDelay: `${index * 80}ms` }}
     >
       {/* Image */}
-      <div className={`relative aspect-square overflow-hidden ${isLight ? 'bg-mist' : 'bg-bg/60'}`}>
+      <div className={`relative aspect-[4/5] overflow-hidden ${isLight ? 'bg-mist' : 'bg-bg/60'}`}>
         <Link to={`/objekt/${item.id}`} className="block h-full">
           {item.image_url ? (
             <img
