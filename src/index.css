@@ -49,7 +49,7 @@
 
 @keyframes scroll-marquee {
   0% {
-    transform: translateX(50%);
+    transform: translateX(60%);
   }
   100% {
     transform: translateX(-100%);
