@@ -94,7 +94,7 @@ const translations = {
       sentSub: 'Vi återkommer snart.',
     },
     footer: {
-      tagline: 'Shipping from Norway & Sweden',
+      tagline: 'Skickar världen över från Sverige eller Norge',
       navLabel: 'Navigering',
       newsletterTitle: 'Håll dig uppdaterad',
       newsletterSub: 'Nya fynd, exklusiva pjäser, retroklassiker.',
@@ -197,7 +197,7 @@ const translations = {
       sentSub: 'Vi kommer tilbake snart.',
     },
     footer: {
-      tagline: 'Shipping from Norway & Sweden',
+      tagline: 'Sender verden rundt fra Norge eller Sverige',
       navLabel: 'Navigasjon',
       newsletterTitle: 'Hold deg oppdatert',
       newsletterSub: 'Nye funn, eksklusive plagg, retroklassikere.',
@@ -300,7 +300,7 @@ const translations = {
       sentSub: 'We\'ll get back to you soon.',
     },
     footer: {
-      tagline: 'Shipping from Norway & Sweden',
+      tagline: 'Shipping worldwide from Norway or Sweden',
       navLabel: 'Navigation',
       newsletterTitle: 'Stay in the loop',
       newsletterSub: 'New drops, exclusive pieces, retro finds.',
